@@ -3,7 +3,7 @@ import { createUseStyles } from "react-jss";
 import './App.css';
 
 // Import lazy loading component
-const Facebook = React.lazy(() => import('./Components/Facebook'));
+const Facebook = React.lazy(() => import('./Pages/Facebook'));
 
 const useStyles = createUseStyles({
   ulElement: {
@@ -28,12 +28,11 @@ function App() {
   const [state, setState] = React.useState(() => {
     return {
       selectedId: 0,
-      selectedComponent: null,
       lists: [
         {
           id: 1,
           name: 'Facebook',
-          component: <Facebook />
+          component: Facebook
         }
       ]
     };
@@ -41,11 +40,10 @@ function App() {
 
   const classes = useStyles();
 
-  const setValues = (id, component) => {
+  const setValues = (id) => {
     setState(prev => ({
       ...prev,
-      selectedId: id,
-      selectedComponent: component
+      selectedId: id
     }));
   }
 
@@ -53,15 +51,17 @@ function App() {
     return (
       <>
         <ul className={classes.ulElement}>
-          {state.lists.map((list) => <li key={list.id} className={classes.liElement} onClick={() => setValues(list.id, list.component)}>{list.name}</li>)}
+          {state.lists.map((list) => <li key={list.id} className={classes.liElement} onClick={() => setValues(list.id)}>{list.name}</li>)}
         </ul>
       </>
     );
   }
-
+  console.log(state)
   return (
     <React.Suspense fallback={<p>Loading...</p>}>
-      <state.component />
+      {state.lists.map(list => (
+        list.id === state.selectedId && <list.component key={list.id} />
+      ))}
     </React.Suspense>
   );
 }
