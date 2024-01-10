@@ -100,9 +100,3 @@ export default function Facebook() {
         </>
     );
 }
-/*
-                <div className={classes.sidebar}></div>
-                <div className={classes.body}></div>
-                <div className={classes.chats}></div>
-*/
-
