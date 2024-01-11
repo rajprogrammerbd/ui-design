@@ -1,7 +1,13 @@
+import React from "react";
 import { createUseStyles } from "react-jss";
 import { FaFacebook } from "react-icons/fa";
 import SearchInputBox from "../../Components/SearchInputBox";
 import { CiSearch } from "react-icons/ci";
+import { RiHome6Fill } from "react-icons/ri";
+import { MdOndemandVideo } from "react-icons/md";
+import { BiStoreAlt } from "react-icons/bi";
+import { RiGroup2Line } from "react-icons/ri";
+import { RiGamepadLine } from "react-icons/ri";
 
 const useStyles = createUseStyles({
     mainContainer: {
@@ -62,11 +68,67 @@ const useStyles = createUseStyles({
         top: 9,
         left: 10
     },
-
+    optionUl: {
+        display: 'grid',
+        listStyleType: 'none',
+        gridTemplateColumns: 'repeat(5, 1fr)',
+        gridTemplateRows: 60,
+        alignContent: 'center'
+    },
+    optionList: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer'
+    }
 });
 
 export default function Facebook() {
+    const [state, setState] = React.useState(() => {
+        return {
+            selectionId: 1,
+            options: [
+                {
+                    id: 1,
+                    icon: RiHome6Fill,
+                    name: 'Home'
+                },
+                {
+                    id: 2,
+                    icon: MdOndemandVideo,
+                    name: 'Video'
+                },
+                {
+                    id: 3,
+                    icon: BiStoreAlt,
+                    name: 'Marketplace'
+                },
+                {
+                    id: 4,
+                    icon: RiGroup2Line,
+                    name: 'Groups'
+                },
+                {
+                    id: 5,
+                    icon: RiGamepadLine,
+                    name: 'Gaming'
+                }
+            ]
+        }
+    });
     const classes = useStyles();
+
+    const setHeaderSelection = (id) => {
+        setState(prev => ({
+            ...prev,
+            selectionId: id
+        }));
+    }
+
+    const isSelected = (id) => {
+        return (id === state.selectionId) ? true : false; 
+    }
 
     return (
         <>
@@ -81,7 +143,26 @@ export default function Facebook() {
                             <SearchInputBox />
                         </div>
                     </div>
-                    <div>options</div>
+                    <div>
+                        <ul className={classes.optionUl}>
+                            {state.options.map((option) => (
+                                <>
+                                    <li
+                                        style={{
+                                            borderBottom: isSelected(option.id) ? "3px solid #0866ff" : 'none',
+                                            color: isSelected(option.id) && "#0866ff"
+                                        }}
+                                        onClick={() => setHeaderSelection(option.id)}
+                                        title={option.name}
+                                        className={classes.optionList}
+                                        key={option.id}
+                                    >
+                                        <option.icon size={25} />
+                                    </li>
+                                </>
+                            ))}
+                        </ul>
+                    </div>
                     <div>chats</div>
                 </div>
 
