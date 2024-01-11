@@ -1,6 +1,7 @@
 import React from 'react';
 import { createUseStyles } from "react-jss";
 import { motion } from "framer-motion"
+import { AppStateProps, LIST_OBJECT_TYPE } from './helper/types';
 import './App.css';
 
 // Import lazy loading component
@@ -26,7 +27,7 @@ const useStyles = createUseStyles({
 });
 
 function App() {
-  const [state, setState] = React.useState(() => {
+  const [state, setState] = React.useState<AppStateProps>(() => {
     return {
       selectedId: 0,
       lists: [
@@ -41,18 +42,18 @@ function App() {
 
   const classes = useStyles();
 
-  const setValues = (id) => {
+  const setValues = React.useCallback((id: number): void => {
     setState(prev => ({
       ...prev,
       selectedId: id
     }));
-  }
+  }, []);
 
   if (!state.selectedId) {
     return (
       <>
         <motion.ul initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className={classes.ulElement}>
-          {state.lists.map((list) => <li key={list.id} className={classes.liElement} onClick={() => setValues(list.id)}>{list.name}</li>)}
+          {state.lists.map((list: LIST_OBJECT_TYPE) => <li key={list.id} className={classes.liElement} onClick={() => setValues(list.id)}>{list.name}</li>)}
         </motion.ul>
       </>
     );
@@ -60,7 +61,7 @@ function App() {
 
   return (
     <React.Suspense fallback={<p>Loading...</p>}>
-      {state.lists.map(list => (
+      {state.lists.map((list: LIST_OBJECT_TYPE) => (
         list.id === state.selectedId && <list.component key={list.id} />
       ))}
     </React.Suspense>

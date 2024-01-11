@@ -1,4 +1,5 @@
 import { createUseStyles } from "react-jss";
+import { ISidebarProps } from "../../helper/types";
 
 const useStyles = createUseStyles({
     title: {
@@ -7,7 +8,7 @@ const useStyles = createUseStyles({
     }
 });
 
-function SidebarOptions(props) {
+function SidebarOptions(props: ISidebarProps) {
     const { hasTitle } = props;
     const classes = useStyles();
 

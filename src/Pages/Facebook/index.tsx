@@ -5,6 +5,7 @@ import SearchInputBox from "../../Components/SearchInputBox";
 import { CiSearch } from "react-icons/ci";
 import { shortCutList, detailsList, settingsList, options } from "../../helper/index";
 import SidebarOptions from "../../Components/SidebarOptions";
+import { FacebookState, IOptions, ISettingsList } from "../../helper/types";
 
 const useStyles = createUseStyles({
     mainContainer: {
@@ -105,7 +106,7 @@ const useStyles = createUseStyles({
 });
 
 export default function Facebook() {
-    const [state, setState] = React.useState(() => {
+    const [state, setState] = React.useState<FacebookState>(() => {
         return {
             selectionHeaderId: 1,
             options,
@@ -116,16 +117,16 @@ export default function Facebook() {
     });
     const classes = useStyles();
 
-    const setHeaderSelection = (id) => {
+    const setHeaderSelection = React.useCallback((id: number) => {
         setState(prev => ({
             ...prev,
             selectionHeaderId: id
         }));
-    }
+    }, []);
 
-    const isSelected = (id) => {
+    const isSelected = React.useCallback((id: number): boolean => {
         return (id === state.selectionHeaderId) ? true : false; 
-    }
+    }, []);
 
     return (
         <>
@@ -142,12 +143,12 @@ export default function Facebook() {
                     </div>
                     <div>
                         <ul className={classes.optionUl}>
-                            {state.options.map((option) => (
+                            {state.options.map((option: IOptions) => (
                                 <>
                                     <li
                                         style={{
                                             borderBottom: isSelected(option.id) ? "3px solid #0866ff" : 'none',
-                                            color: isSelected(option.id) && "#0866ff"
+                                            color: isSelected(option.id) ? "#0866ff" : "inherit"
                                         }}
                                         onClick={() => setHeaderSelection(option.id)}
                                         title={option.name}
@@ -162,7 +163,7 @@ export default function Facebook() {
                     </div>
                     <div className={classes.settingOptions}>
                         <ul className={classes.settingOptionsUL}>
-                            {state.settingsList.map(list => (
+                            {state.settingsList.map((list: ISettingsList) => (
                                 <>
                                     <li className={classes.settingsListLi} key={list.id}><list.icon size={25} /></li>
                                 </>
