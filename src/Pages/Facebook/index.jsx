@@ -40,6 +40,7 @@ const useStyles = createUseStyles({
 
     },
     wholeBody: {
+        backgroundColor: '#00000003',
         gridColumnStart: 1, // need to change in specific width
         gridColumnEnd: 9, // need to change in specific width
         gridRowStart: 2,
@@ -101,7 +102,7 @@ const useStyles = createUseStyles({
         marginRight: 50
     },
     settingsListLi: {
-        backgroundColor: '#ddd',
+        backgroundColor: '#f3f3f3',
         borderRadius: 50,
         display: 'flex',
         flexDirection: 'column',
