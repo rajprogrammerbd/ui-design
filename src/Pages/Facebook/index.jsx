@@ -3,15 +3,8 @@ import { createUseStyles } from "react-jss";
 import { FaFacebook } from "react-icons/fa";
 import SearchInputBox from "../../Components/SearchInputBox";
 import { CiSearch } from "react-icons/ci";
-import { RiHome6Fill } from "react-icons/ri";
-import { MdOndemandVideo } from "react-icons/md";
-import { BiStoreAlt } from "react-icons/bi";
-import { RiGroup2Line } from "react-icons/ri";
-import { CgMenuGridO } from "react-icons/cg";
-import { BiSolidMessageRounded } from "react-icons/bi";
-import { RiGamepadLine } from "react-icons/ri";
-import { CgProfile } from "react-icons/cg";
-import { IoNotifications } from "react-icons/io5";
+import { shortCutList, detailsList, settingsList, options } from "../../helper/index";
+import SidebarOptions from "../../Components/SidebarOptions";
 
 const useStyles = createUseStyles({
     mainContainer: {
@@ -114,52 +107,11 @@ const useStyles = createUseStyles({
 export default function Facebook() {
     const [state, setState] = React.useState(() => {
         return {
-            selectionId: 1,
-            options: [
-                {
-                    id: 1,
-                    icon: RiHome6Fill,
-                    name: 'Home'
-                },
-                {
-                    id: 2,
-                    icon: MdOndemandVideo,
-                    name: 'Video'
-                },
-                {
-                    id: 3,
-                    icon: BiStoreAlt,
-                    name: 'Marketplace'
-                },
-                {
-                    id: 4,
-                    icon: RiGroup2Line,
-                    name: 'Groups'
-                },
-                {
-                    id: 5,
-                    icon: RiGamepadLine,
-                    name: 'Gaming'
-                }
-            ],
-            settingsList: [
-                {
-                    id: 1,
-                    icon: CgMenuGridO
-                },
-                {
-                    id: 2,
-                    icon: BiSolidMessageRounded
-                },
-                {
-                    id: 3,
-                    icon: IoNotifications
-                },
-                {
-                    id: 4,
-                    icon: CgProfile
-                }
-            ]
+            selectionHeaderId: 1,
+            options,
+            settingsList,
+            detailsList,
+            shortCutList
         }
     });
     const classes = useStyles();
@@ -167,12 +119,12 @@ export default function Facebook() {
     const setHeaderSelection = (id) => {
         setState(prev => ({
             ...prev,
-            selectionId: id
+            selectionHeaderId: id
         }));
     }
 
     const isSelected = (id) => {
-        return (id === state.selectionId) ? true : false; 
+        return (id === state.selectionHeaderId) ? true : false; 
     }
 
     return (
@@ -221,7 +173,8 @@ export default function Facebook() {
 
                 <div className={classes.wholeBody}>
                     <div className={classes.sidebar}>
-                        <p>SideBar</p>
+                        <SidebarOptions hasTitle={false} />
+                        <SidebarOptions hasTitle={{ title: 'Your shortcuts' }} />
                     </div>
                     <div className={classes.body}>
                         <p>Body</p>
