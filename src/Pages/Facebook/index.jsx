@@ -7,7 +7,11 @@ import { RiHome6Fill } from "react-icons/ri";
 import { MdOndemandVideo } from "react-icons/md";
 import { BiStoreAlt } from "react-icons/bi";
 import { RiGroup2Line } from "react-icons/ri";
+import { CgMenuGridO } from "react-icons/cg";
+import { BiSolidMessageRounded } from "react-icons/bi";
 import { RiGamepadLine } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
+import { IoNotifications } from "react-icons/io5";
 
 const useStyles = createUseStyles({
     mainContainer: {
@@ -81,6 +85,28 @@ const useStyles = createUseStyles({
         alignItems: 'center',
         justifyContent: 'center',
         cursor: 'pointer'
+    },
+    settingOptions: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+    settingOptionsUL: {
+        display: 'grid',
+        width: '40%',
+        gap: 20,
+        listStyleType: 'none',
+        gridTemplateColumns: '1fr 1fr 1fr 1fr',
+        marginRight: 50
+    },
+    settingsListLi: {
+        backgroundColor: '#ddd',
+        borderRadius: 50,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: 7
     }
 });
 
@@ -113,6 +139,24 @@ export default function Facebook() {
                     id: 5,
                     icon: RiGamepadLine,
                     name: 'Gaming'
+                }
+            ],
+            settingsList: [
+                {
+                    id: 1,
+                    icon: CgMenuGridO
+                },
+                {
+                    id: 2,
+                    icon: BiSolidMessageRounded
+                },
+                {
+                    id: 3,
+                    icon: IoNotifications
+                },
+                {
+                    id: 4,
+                    icon: CgProfile
                 }
             ]
         }
@@ -163,7 +207,15 @@ export default function Facebook() {
                             ))}
                         </ul>
                     </div>
-                    <div>chats</div>
+                    <div className={classes.settingOptions}>
+                        <ul className={classes.settingOptionsUL}>
+                            {state.settingsList.map(list => (
+                                <>
+                                    <li className={classes.settingsListLi} key={list.id}><list.icon size={25} /></li>
+                                </>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
 
                 <div className={classes.wholeBody}>
