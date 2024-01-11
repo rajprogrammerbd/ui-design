@@ -1,5 +1,6 @@
 import React from 'react';
 import { createUseStyles } from "react-jss";
+import { motion } from "framer-motion"
 import './App.css';
 
 // Import lazy loading component
@@ -50,13 +51,13 @@ function App() {
   if (!state.selectedId) {
     return (
       <>
-        <ul className={classes.ulElement}>
+        <motion.ul initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }} className={classes.ulElement}>
           {state.lists.map((list) => <li key={list.id} className={classes.liElement} onClick={() => setValues(list.id)}>{list.name}</li>)}
-        </ul>
+        </motion.ul>
       </>
     );
   }
-  console.log(state)
+
   return (
     <React.Suspense fallback={<p>Loading...</p>}>
       {state.lists.map(list => (
