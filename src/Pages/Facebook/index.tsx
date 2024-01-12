@@ -22,10 +22,23 @@ const useStyles = createUseStyles({
         gridColumnStart: 1,
         display: 'grid',
         gridTemplateColumns: '1fr 2fr 1fr',
-        boxShadow: '1px 1px 15px 0px #ddd'
+        boxShadow: '1px 1px 15px 0px #ddd',
+        top: 0,
+        position: "fixed",
+        width: "100%",
+        background: "#fff"
     },
     sidebar: {
-
+        display: 'flex',
+        flexDirection: "column",
+        alignItems: 'flex-start',
+        justifyContent: "flex-start",
+        flexWrap: 'wrap',
+        marginLeft: 16
+    },
+    innerSideBar: {
+        width: "80%",
+        height: 'auto'
     },
     body: {
 
@@ -101,7 +114,8 @@ const useStyles = createUseStyles({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: 7
+        padding: 7,
+        cursor: "pointer"
     }
 });
 
@@ -174,8 +188,12 @@ export default function Facebook() {
 
                 <div className={classes.wholeBody}>
                     <div className={classes.sidebar}>
-                        <SidebarOptions hasTitle={false} />
-                        <SidebarOptions hasTitle={{ title: 'Your shortcuts' }} />
+                        <div style={{ marginTop: 25 }}></div>
+                        <div className={classes.innerSideBar}>
+                            <SidebarOptions hasTitle={false} lists={state.detailsList} />
+                            <div style={{ marginTop: 25 }}></div>
+                            <SidebarOptions hasTitle={{ title: 'Your shortcuts' }} lists={state.shortCutList} />
+                        </div>
                     </div>
                     <div className={classes.body}>
                         <p>Body</p>

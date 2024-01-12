@@ -42,6 +42,7 @@ export type FacebookState = {
     shortCutList: ISortCutList[];
 }
 
-export type ISidebarProps = {
+export type ISidebarProps<T> = {
     hasTitle: false | { title: string };
+    lists: T;
 }
