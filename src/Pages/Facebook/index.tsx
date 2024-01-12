@@ -34,7 +34,11 @@ const useStyles = createUseStyles({
         alignItems: 'flex-start',
         justifyContent: "flex-start",
         flexWrap: 'wrap',
-        marginLeft: 16
+        overflowY: 'scroll',
+
+        '&::-webkit-scrollbar': {
+            display: 'none'
+        }
     },
     innerSideBar: {
         width: "80%",
@@ -53,6 +57,7 @@ const useStyles = createUseStyles({
         gridRowStart: 2,
         display: 'grid',
         gridTemplateColumns: '1fr 2fr 1fr',
+        overflow: 'hidden',
 
         '@media (min-width: 2000px)': {
             gridColumnStart: 2,
