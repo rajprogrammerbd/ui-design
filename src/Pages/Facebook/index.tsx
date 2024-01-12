@@ -131,16 +131,17 @@ export default function Facebook() {
     });
     const classes = useStyles();
 
-    const setHeaderSelection = React.useCallback((id: number) => {
+    const setHeaderSelection = (id: number) => {
+        console.log('calling', id);
         setState(prev => ({
             ...prev,
             selectionHeaderId: id
         }));
-    }, []);
+    };
 
-    const isSelected = React.useCallback((id: number): boolean => {
+    const isSelected = (id: number): boolean => {
         return (id === state.selectionHeaderId) ? true : false; 
-    }, []);
+    };
 
     return (
         <>
