@@ -6,6 +6,7 @@ import { CiSearch } from "react-icons/ci";
 import { shortCutList, detailsList, settingsList, options } from "../../helper/index";
 import SidebarOptions from "../../Components/SidebarOptions";
 import { FacebookState, IOptions, ISettingsList } from "../../helper/types";
+import Chats from "./Components/Chats";
 
 const useStyles = createUseStyles({
     mainContainer: {
@@ -48,7 +49,18 @@ const useStyles = createUseStyles({
 
     },
     chats: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        overflowY: 'scroll',
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        '-ms-overflow-style': 'none',
+        scrollbarWidth: 'none',
 
+        '&::-webkit-scrollbar': {
+            display: 'none'
+        }
     },
     wholeBody: {
         backgroundColor: '#00000003',
@@ -56,7 +68,7 @@ const useStyles = createUseStyles({
         gridColumnEnd: 9, // need to change in specific width
         gridRowStart: 2,
         display: 'grid',
-        gridTemplateColumns: '1fr 2fr 1fr',
+        gridTemplateColumns: '1fr 2fr 0.8fr',
         overflow: 'hidden',
 
         '@media (min-width: 2000px)': {
@@ -164,20 +176,18 @@ export default function Facebook() {
                     <div>
                         <ul className={classes.optionUl}>
                             {state.options.map((option: IOptions) => (
-                                <>
-                                    <li
-                                        style={{
-                                            borderBottom: isSelected(option.id) ? "3px solid #0866ff" : 'none',
-                                            color: isSelected(option.id) ? "#0866ff" : "inherit"
-                                        }}
-                                        onClick={() => setHeaderSelection(option.id)}
-                                        title={option.name}
-                                        className={classes.optionList}
-                                        key={option.id}
-                                    >
-                                        <option.icon size={25} />
-                                    </li>
-                                </>
+                                <li
+                                    style={{
+                                        borderBottom: isSelected(option.id) ? "3px solid #0866ff" : 'none',
+                                        color: isSelected(option.id) ? "#0866ff" : "inherit"
+                                    }}
+                                    onClick={() => setHeaderSelection(option.id)}
+                                    title={option.name}
+                                    className={classes.optionList}
+                                    key={option.id}
+                                >
+                                    <option.icon size={25} />
+                                </li>
                             ))}
                         </ul>
                     </div>
@@ -205,7 +215,7 @@ export default function Facebook() {
                         <p>Body</p>
                     </div>
                     <div className={classes.chats}>
-                        <p>Chats</p>
+                        <Chats />
                     </div>
                 </div>
             </div>
